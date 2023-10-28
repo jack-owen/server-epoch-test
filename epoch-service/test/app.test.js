@@ -6,7 +6,9 @@ test('true to be truthy', () => {
 });
 
 test('return valid time', async () => {
-    const { body } = await request
+  const { body } = await request
     .get("/time")
     .expect(200);
+
+  expect(body).toEqual({ epoch: '2023-10-28T10:31:18.822Z' });
 });
