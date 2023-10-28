@@ -17,3 +17,9 @@ test('return valid time', async () => {
   expect(body).toEqual({ epoch: expect.any(Number) });
   expect(body.epoch).toBe(mockTimestamp);
 });
+
+test('return prometheus metrics', async () => {
+  await request
+    .get("/metrics")
+    .expect(200);
+});
