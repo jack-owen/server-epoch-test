@@ -3,6 +3,34 @@ const request = require("supertest")(app);
 
 const mockTimestamp = new Date('2019-04-07T10:20:30Z').getTime();
 
+const defaultMetrics = [
+  "process_cpu_user_seconds_total",
+  "process_cpu_system_seconds_total",
+  "process_cpu_seconds_total",
+  "process_start_time_seconds",
+  "process_resident_memory_bytes",
+  "nodejs_eventloop_lag_seconds",
+  "nodejs_eventloop_lag_min_seconds",
+  "nodejs_eventloop_lag_max_seconds",
+  "nodejs_eventloop_lag_mean_seconds",
+  "nodejs_eventloop_lag_stddev_seconds",
+  "nodejs_eventloop_lag_p50_seconds",
+  "nodejs_eventloop_lag_p90_seconds",
+  "nodejs_eventloop_lag_p99_seconds",
+  "nodejs_active_handles",
+  "nodejs_active_handles_total",
+  "nodejs_active_requests",
+  "nodejs_active_requests_total",
+  "nodejs_heap_size_total_bytes",
+  "nodejs_heap_size_used_bytes",
+  "nodejs_external_memory_bytes",
+  "nodejs_heap_space_size_total_bytes",
+  "nodejs_heap_space_size_used_bytes",
+  "nodejs_heap_space_size_available_bytes",
+  "nodejs_version_info",
+  "nodejs_gc_duration_seconds"
+];
+
 test('true to be truthy', () => {
   expect(true).toBe(true);
 });
@@ -10,16 +38,16 @@ test('true to be truthy', () => {
 test('return valid time', async () => {
   global.Date.now = jest.fn(() => mockTimestamp)
 
-  const { body } = await request
-    .get("/time")
-    .expect(200);
+  const { body } = await request.get("/time").expect(200);
 
   expect(body).toEqual({ epoch: expect.any(Number) });
   expect(body.epoch).toBe(mockTimestamp);
 });
 
-test('return prometheus metrics', async () => {
-  await request
-    .get("/metrics")
-    .expect(200);
+test('return default prometheus metrics', async () => {
+  const { text } = await request.get("/metrics").expect(200);
+
+  defaultMetrics.forEach(item => {
+    expect(text).toContain(item);
+  });
 });

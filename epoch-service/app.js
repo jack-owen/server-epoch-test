@@ -1,10 +1,10 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const promMid = require('express-prometheus-middleware');
 
-var usersRouter = require('./routes/time');
-var metricsRouter = require('./routes/metrics');
+const timeRouter = require('./routes/time');
 
 var app = express();
 
@@ -14,7 +14,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/time', usersRouter);
-app.use('/metrics', metricsRouter);
+app.use('/time', timeRouter);
+app.use(promMid({
+    metricsPath: '/metrics',
+    collectDefaultMetrics: true,
+    requestDurationBuckets: [0.1, 0.5, 1, 1.5],
+    requestLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+    responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+}));
 
 module.exports = app;
