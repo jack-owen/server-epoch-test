@@ -10,5 +10,5 @@ test('return valid time', async () => {
     .get("/time")
     .expect(200);
 
-  expect(body).toEqual({ epoch: '2023-10-28T10:31:18.822Z' });
+  expect(body).toEqual({ epoch: expect.any(Number) });
 });
