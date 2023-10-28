@@ -13,8 +13,10 @@ npm install
 ## Usage
 
 ```bash
-npm run start
+cd epoch-service && npm run start
 ```
+
+Navigate to [http://localhost:3001/](http://localhost:3001/)
 
 ## Run tests
 
