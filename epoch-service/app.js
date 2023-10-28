@@ -14,6 +14,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+    const authHeader = req.header('Authorization');
+    if (authHeader === 'mysecrettoken') {
+        next();
+    } else {
+        res.status(403).json({ error: 'Forbidden: Invalid Authorization token' });
+    }
+});
+
 app.use('/time', timeRouter);
 app.use(promMid({
     metricsPath: '/metrics',
