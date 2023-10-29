@@ -11,7 +11,7 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   if (authHeader === 'mysecrettoken') {
     next();
   } else {
-    res.status(403).json({error: 'Forbidden: Invalid Authorization token'});
+    res.status(403).json({ error: 'Forbidden: Invalid Authorization token' });
   }
 });
 
