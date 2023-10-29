@@ -1,4 +1,3 @@
-import { timeStamp } from "console";
 import React, { useEffect, useState } from "react";
 
 import "./style.css";
@@ -10,6 +9,14 @@ const Time = () => {
 
   useEffect(() => {
     getServerEpoch();
+
+    const intervalId = setInterval(() => {
+      setClientTime(new Date());
+    }, 100);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   const getServerEpoch = async () => {
@@ -39,9 +46,10 @@ const Time = () => {
   };
 
   const calculateTimeDifference = () => {
+    console.log("Called ", clientTime.getTime() - serverTime.getTime())
     if (serverTime) {
       const timeDifference = Math.abs(
-        (clientTime.getSeconds() - serverTime.getSeconds())
+        (clientTime.getTime() - serverTime.getTime())
       );
 
       return new Date(timeDifference).toISOString().slice(11, 19);
