@@ -41,3 +41,19 @@ Navigate to [http://localhost:3000/](http://localhost:3000/)
 ```bash
 npm test
 ```
+
+---
+
+This project uses ESLint to identify and report on patterns
+
+```bash
+npx eslint yourfile.js
+```
+
+## If I had more time
+
+If I had more time I would have liked to explore more about the ExpressJS framework and identify any best practices I may have violated with regards to running the application in production, structuring of the files, improved API error handling.
+
+While I used TDD in most places, if I had more time I would consider writing more thorough unit tests for the ReactJS client application.
+
+I would have liked to apply a standardised TSLint and ESLint across both the service and client applications, rather than 1 per application.
