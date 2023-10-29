@@ -8,13 +8,16 @@ const Time = () => {
   const [clientTime, setClientTime] = useState(new Date());
 
   useEffect(() => {
-    getServerEpoch();
+    const getServerEpochInterval = setInterval(() => {
+      getServerEpoch();
+    }, 30000);
 
     const intervalId = setInterval(() => {
       setClientTime(new Date());
     }, 100);
 
     return () => {
+      clearInterval(getServerEpochInterval);
       clearInterval(intervalId);
     };
   }, []);
