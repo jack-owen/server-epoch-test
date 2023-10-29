@@ -6,23 +6,37 @@ A technical test to create a simple server and client with ExpressJS and ReactJS
     <img src="./dashboard.png" >
 </p>
 
-## Installation
+## Run the Epoch-service
 
-Use the package manager npm to install packages.
+Navigate to the server folder
 
 ```bash
+cd epoch-service
 npm install
-```
-
-## Usage
-
-```bash
-cd epoch-service && npm run start
+npm run start
 ```
 
 Navigate to [http://localhost:3001/](http://localhost:3001/)
 
-## Run tests
+### Run tests
+
+```bash
+npm test
+```
+
+## Run the Client application
+
+Navigate to the server folder
+
+```bash
+cd client
+npm install
+npm run start
+```
+
+Navigate to [http://localhost:3000/](http://localhost:3000/)
+
+### Run tests
 
 ```bash
 npm test
