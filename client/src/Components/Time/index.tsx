@@ -12,6 +12,7 @@ const Time = () => {
       getServerEpoch();
     }, 30000);
 
+    setClientTime(new Date());
     const intervalId = setInterval(() => {
       setClientTime(new Date());
     }, 100);
