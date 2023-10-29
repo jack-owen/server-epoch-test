@@ -57,3 +57,5 @@ If I had more time I would have liked to explore more about the ExpressJS framew
 While I used TDD in most places, if I had more time I would consider writing more thorough unit tests for the ReactJS client application.
 
 I would have liked to apply a standardised TSLint and ESLint across both the service and client applications, rather than 1 per application.
+
+I would have written the epoch-service with Typescript rather than JavaScript to ensure type safety.
