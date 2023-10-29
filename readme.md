@@ -2,6 +2,10 @@
 
 A technical test to create a simple server and client with ExpressJS and ReactJS.
 
+<p align="center">
+    <img src="./dashboard.png" >
+</p>
+
 ## Installation
 
 Use the package manager npm to install packages.
