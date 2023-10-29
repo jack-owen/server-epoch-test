@@ -7,10 +7,18 @@ const Metrics = () => {
   const [metrics, setMetrics] = useState("");
 
   useEffect(() => {
-    getServerEpoch();
+    getPrometheusMetrics();
+
+    const getPrometheusMetricsInterval = setInterval(() => {
+      getPrometheusMetrics();
+    }, 30000);
+
+    return () => {
+      clearInterval(getPrometheusMetricsInterval);
+    };
   }, []);
 
-  const getServerEpoch = async () => {
+  const getPrometheusMetrics = async () => {
     try {
       setIsLoading(true);
       const res = await fetch(`http://localhost:3001/metrics`, {
