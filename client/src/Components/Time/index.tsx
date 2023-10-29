@@ -32,8 +32,6 @@ const Time = () => {
         headers: { authorization: config.secretToken },
       });
 
-      if (!res.ok) throw new Error(res.statusText);
-
       const { epoch } = await res.json();
 
       const epochTimestamp = parseInt(epoch, 10);

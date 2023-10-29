@@ -26,8 +26,6 @@ const Metrics = () => {
         headers: { authorization: config.secretToken },
       });
 
-      if (!res.ok) throw new Error(res.statusText);
-
       const text = await res.text();
       setMetrics(text);
 
