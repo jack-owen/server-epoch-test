@@ -23,7 +23,7 @@ const Time = () => {
     try {
       setIsLoading(true);
       const res = await fetch(`http://localhost:3001/time`, {
-        headers: { authorization: 'mysecrettoken' },
+        headers: { authorization: "mysecrettoken" },
       });
 
       if (!res.ok) throw new Error(res.statusText);
@@ -37,7 +37,7 @@ const Time = () => {
       const delay = setTimeout(() => {
         setIsLoading(false);
       }, 1000);
-  
+
       return () => clearTimeout(delay);
     } catch (err) {
       setIsLoading(false);
@@ -46,10 +46,9 @@ const Time = () => {
   };
 
   const calculateTimeDifference = () => {
-    console.log("Called ", clientTime.getTime() - serverTime.getTime())
     if (serverTime) {
       const timeDifference = Math.abs(
-        (clientTime.getTime() - serverTime.getTime())
+        clientTime.getTime() - serverTime.getTime()
       );
 
       return new Date(timeDifference).toISOString().slice(11, 19);
@@ -60,21 +59,19 @@ const Time = () => {
     <div className="time">
       <h1>/time endpoint</h1>
       <div>
-        {isLoading ? 
-          (
-            <div className="loading-spinner">
-              <div className="spinner"></div>
-            </div>
-          ) :
+        {isLoading ? (
+          <div className="loading-spinner">
+            <div className="spinner"></div>
+          </div>
+        ) : (
           <>
             <p>Server Epoch: {serverTime.getTime()}</p>
             <p>Time Difference: {calculateTimeDifference()}</p>
           </>
-        }
+        )}
       </div>
     </div>
   );
 };
-
 
 export default Time;
