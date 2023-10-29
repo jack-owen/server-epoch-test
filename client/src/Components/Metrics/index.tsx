@@ -5,6 +5,7 @@ import config from "../../config.json";
 
 const Metrics = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string>();
   const [metrics, setMetrics] = useState("");
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const Metrics = () => {
       return () => clearTimeout(delay);
     } catch (err) {
       setIsLoading(false);
-      console.error("Error:", err);
+      setError("Unable to fetch metrics");
     }
   };
 
@@ -48,6 +49,8 @@ const Metrics = () => {
           <div className="loading-spinner">
             <div className="spinner"></div>
           </div>
+        ) : error ? (
+          <div>Error: {error}</div>
         ) : (
           <pre>{metrics}</pre>
         )}
