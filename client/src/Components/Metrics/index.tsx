@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-
 import "./style.css";
+
+import config from "../../config.json";
 
 const Metrics = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,8 +22,8 @@ const Metrics = () => {
   const getPrometheusMetrics = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch(`http://localhost:3001/metrics`, {
-        headers: { authorization: "mysecrettoken" },
+      const res = await fetch(`${config.serverURI}/metrics`, {
+        headers: { authorization: config.secretToken },
       });
 
       if (!res.ok) throw new Error(res.statusText);
