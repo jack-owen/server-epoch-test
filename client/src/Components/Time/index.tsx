@@ -1,10 +1,12 @@
+import { timeStamp } from "console";
 import React, { useEffect, useState } from "react";
 
 import "./style.css";
 
 const Time = () => {
-  const [serverEpoch, setServerEpoch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [serverTime, setServerTime] = useState(new Date());
+  const [clientTime, setClientTime] = useState(new Date());
 
   useEffect(() => {
     getServerEpoch();
@@ -17,9 +19,14 @@ const Time = () => {
         headers: { authorization: 'mysecrettoken' },
       });
 
-      const text = await res.text();
+      if (!res.ok) throw new Error(res.statusText);
 
-      setServerEpoch(text);
+      const { epoch } = await res.json();
+
+      const epochTimestamp = parseInt(epoch, 10);
+      const date = new Date(epochTimestamp);
+      setServerTime(date);
+
       const delay = setTimeout(() => {
         setIsLoading(false);
       }, 1000);
@@ -35,14 +42,15 @@ const Time = () => {
     <div className="time">
       <h1>/time endpoint</h1>
       <div>
-        <p>Server Epoch</p>
         {isLoading ? 
           (
             <div className="loading-spinner">
               <div className="spinner"></div>
             </div>
           ) :
-          <pre>{serverEpoch}</pre>
+          <>
+            <p>Server Epoch: {serverTime.getTime()}</p>
+          </>
         }
       </div>
     </div>
