@@ -38,6 +38,16 @@ const Time = () => {
     }
   };
 
+  const calculateTimeDifference = () => {
+    if (serverTime) {
+      const timeDifference = Math.abs(
+        (clientTime.getSeconds() - serverTime.getSeconds())
+      );
+
+      return new Date(timeDifference).toISOString().slice(11, 19);
+    }
+  };
+
   return (
     <div className="time">
       <h1>/time endpoint</h1>
@@ -50,6 +60,7 @@ const Time = () => {
           ) :
           <>
             <p>Server Epoch: {serverTime.getTime()}</p>
+            <p>Time Difference: {calculateTimeDifference()}</p>
           </>
         }
       </div>
