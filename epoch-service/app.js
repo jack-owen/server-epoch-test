@@ -24,7 +24,6 @@ app.use((req, res, next) => {
   }
 });
 
-app.use("/time", timeRouter);
 app.use(
   promMid({
     metricsPath: "/metrics",
@@ -34,5 +33,7 @@ app.use(
     responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
   })
 );
+
+app.use("/time", timeRouter);
 
 module.exports = app;

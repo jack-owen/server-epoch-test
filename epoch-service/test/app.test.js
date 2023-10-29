@@ -5,6 +5,13 @@ const authToken = "mysecrettoken";
 const mockTimestamp = new Date("2019-04-07T10:20:30Z").getTime();
 
 const defaultMetrics = [
+  "http_request_duration_seconds_bucket",
+  "http_request_duration_seconds_sum",
+  "http_request_duration_seconds_count",
+  "http_requests_total",
+  "http_response_length_bytes_bucket",
+  "http_response_length_bytes_sum",
+  "http_response_length_bytes_count",
   "process_cpu_user_seconds_total",
   "process_cpu_system_seconds_total",
   "process_cpu_seconds_total",
