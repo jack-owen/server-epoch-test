@@ -4,8 +4,9 @@ import "./style.css";
 import config from "../../config.json";
 
 const Time = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [serverTime, setServerTime] = useState(new Date());
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>();
+  const [serverTime, setServerTime] = useState<Date>();
   const [clientTime, setClientTime] = useState(new Date());
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const Time = () => {
       return () => clearTimeout(delay);
     } catch (err) {
       setIsLoading(false);
-      console.error("Error:", err);
+      setError("Unable to fetch server time");
     }
   };
 
@@ -67,9 +68,11 @@ const Time = () => {
           <div className="loading-spinner">
             <div className="spinner"></div>
           </div>
+        ) : error ? (
+          <div>Error: {error}</div>
         ) : (
           <>
-            <p>Server Epoch: {serverTime.getTime()}</p>
+            <p>Server Epoch: {serverTime?.getTime()}</p>
             <p>Time Difference: {calculateTimeDifference()}</p>
           </>
         )}
